@@ -197,7 +197,14 @@ class Renderer < Struct.new(:search, :screen)
   end
 
   def search_line
-    "> " + search.query
+    prompt = "> "
+    max_query_length = screen.width - prompt.size - 1
+
+    if search.query.size < max_query_length
+      prompt + search.query
+    else
+      prompt + "$" + search.query[-max_query_length..-1]
+    end
   end
 
   def correct_match_count(matches)
