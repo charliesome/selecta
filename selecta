@@ -187,7 +187,6 @@ class Renderer < Struct.new(:search, :screen)
   end
 
   def render
-    search_line = "> " + search.query
     matches = search.matches
     unless matches.empty?
       matches[search.index] = Text[:default_black, matches.fetch(search.index)]
@@ -195,6 +194,10 @@ class Renderer < Struct.new(:search, :screen)
     matches = correct_match_count(matches)
     choices = [search_line] + matches
     Rendered.new(choices, search_line)
+  end
+
+  def search_line
+    "> " + search.query
   end
 
   def correct_match_count(matches)
