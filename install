@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+if [ ! "$(ruby -e 'puts RUBY_VERSION >= "1.9.3"' 2>/dev/null)" = "true" ]; then
+  echo "Selecta requires Ruby 1.9.3 or greater." >&2
+  exit 1
+fi
+
+set -e
+
+RUBY_PATH="$(ruby -e 'puts Gem.ruby')"
+
+BIN_DIR="${PREFIX:-/usr/local}/bin"
+
+mkdir -p "$BIN_DIR"
+
+echo "#!$RUBY_PATH --disable-gem" | cat - "$(dirname "$0")/selecta" > "$BIN_DIR/selecta"
+
+chmod +x "$BIN_DIR/selecta"
+
+echo "Installed selecta into \`$BIN_DIR'"
