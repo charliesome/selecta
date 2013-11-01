@@ -1,9 +1,4 @@
 #!/usr/bin/env ruby
-
-if RUBY_VERSION < '1.9.3'
-  abort "error: Selecta requires Ruby 1.9.3 or higher."
-end
-
 require "io/console"
 
 # I don't know how to get these key codes other than by hard-coding the
